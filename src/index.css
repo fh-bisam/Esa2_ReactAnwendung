@@ -55,3 +55,41 @@ footer {
   text-align: center;
   color: #555;
 }
+
+.ausflug-formular {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 450px;
+  margin-top: 30px;
+}
+
+.formular-feld {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formular-feld label {
+  font-weight: bold;
+}
+
+.formular-feld input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.ausflug-formular button {
+  padding: 12px;
+  background-color: #19314f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ausflug-formular button:hover {
+  background-color: #294d75;
+}

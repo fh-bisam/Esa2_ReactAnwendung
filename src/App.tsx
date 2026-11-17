@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Navigation from './komponenten/Navigation';
@@ -6,6 +7,9 @@ import Wetterseite from './seiten/Wetterseite';
 import KIBerater from './seiten/KIBerater';
 
 function App() {
+  const [ort, setOrt] = useState<string>('');
+  const [datum, setDatum] = useState<string>('');
+
   return (
     <>
       <header>
@@ -17,9 +21,28 @@ function App() {
 
       <main>
         <Routes>
-          <Route path="/" element={<Startseite />} />
-          <Route path="/wetter" element={<Wetterseite />} />
-          <Route path="/ki-berater" element={<KIBerater />} />
+          <Route
+            path="/"
+            element={
+              <Startseite
+                ort={ort}
+                datum={datum}
+                onOrtChange={setOrt}
+                onDatumChange={setDatum}
+              />
+            }
+          />
+
+          <Route
+            path="/wetter"
+            element={<Wetterseite ort={ort} datum={datum} />}
+          />
+
+          <Route
+            path="/ki-berater"
+            element={<KIBerater ort={ort} datum={datum} />}
+          />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
