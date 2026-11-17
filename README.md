@@ -1,75 +1,115 @@
-# React + TypeScript + Vite
+# TripWise – Intelligenter Ausflugsplaner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. Projektbeschreibung
 
-Currently, two official plugins are available:
+TripWise ist eine Webanwendung zur Planung von Ausflügen und Kurzreisen. Die Anwendung verbindet Wettervorhersagen mit künstlicher Intelligenz, um passende Aktivitäten für einen ausgewählten Ort und ein bestimmtes Datum vorzuschlagen.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Nutzer können einen Ort auswählen, die Wetterbedingungen abrufen und individuelle Empfehlungen erhalten. Dabei werden sowohl die Wetterdaten als auch persönliche Interessen berücksichtigt.
 
-## React Compiler
+Das Projekt wird im Rahmen der Lehrveranstaltung Front-End Development als Gruppenarbeit entwickelt.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 2. Funktionen
 
-## Expanding the ESLint configuration
+Die Anwendung besteht aus drei Ansichten:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Startseite
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Die Startseite stellt TripWise vor. Nutzer können einen Ort und ein gewünschtes Datum auswählen. Die Eingaben werden innerhalb der Anwendung verwaltet und für die weiteren Ansichten verwendet.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Wetterübersicht
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Die Wetterübersicht zeigt Wetterinformationen für den gewählten Ort. Die Daten werden über die öffentliche Open-Meteo-REST-API abgerufen und übersichtlich dargestellt. Ladezustände und mögliche Fehler werden berücksichtigt.
 
+### KI-Ausflugsberater
+
+Der KI-Berater erstellt individuelle Empfehlungen anhand der ausgewählten Wetterdaten und Interessen. Dafür wird eine LLM-API eingebunden. Längere Antworten werden mittels Streaming schrittweise angezeigt.
+
+## 3. Verwendete Technologien
+
+| Technologie | Verwendung |
+|---|---|
+| React | Benutzeroberfläche und Komponenten |
+| TypeScript | Typisierung und Programmlogik |
+| Vite | Entwicklungsumgebung und Build |
+| React Router | Navigation zwischen den Ansichten |
+| CSS | Gestaltung der Benutzeroberfläche |
+| Open-Meteo | Öffentliche REST-API für Wetterdaten |
+| LLM-API | Individuelle Ausflugsempfehlungen |
+| Git und GitHub | Versionsverwaltung und Gruppenarbeit |
+
+Der konkrete Anbieter der LLM-API wird im Zuge der Implementierung festgelegt.
+
+## 4. Installation und Ausführung
+
+Voraussetzung ist eine aktuelle, mit Vite kompatible Node.js-Version mit npm.
+
+Repository klonen und in das Projektverzeichnis wechseln. Anschließend die Abhängigkeiten installieren:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Entwicklungsserver starten:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run dev
 ```
+
+Produktions-Build erstellen:
+
+```bash
+npm run build
+```
+
+Code mit ESLint überprüfen:
+
+```bash
+npm run lint
+```
+
+Die Anwendung kann über die im Terminal angezeigte lokale Adresse geöffnet werden.
+
+## 5. Aufgabenverteilung
+
+### Gruppenmitglied Martin Biela-Sattler – React-Anwendung und Benutzerinteraktion
+
+- Erstellung des GitHub-Repositories und Einrichtung der Entwicklungsumgebung.
+- Aufbau der React-Anwendung mit TypeScript und Vite.
+- Einrichtung der Navigation mit React Router.
+- Entwicklung der drei Ansichten.
+- Erstellung wiederverwendbarer React-Komponenten.
+- Implementierung der Ortssuche und Datumsauswahl.
+- Zustandsverwaltung und Weitergabe der Benutzereingaben.
+- Vorbereitung der Wetteranzeige und der Schnittstellen für die API-Integration.
+- Erstellung und Pflege der Projektdokumentation.
+
+### Gruppenmitglied Rainer Frauenschiel – Datenanbindung, KI und Design
+
+- Integration der Open-Meteo-REST-API.
+- Entwicklung der API-Logik mit Custom Hooks.
+- Verarbeitung und Darstellung der Wetterdaten.
+- Implementierung der Ladezustände und Fehlerbehandlung.
+- Integration einer LLM-API.
+- Entwicklung der individuellen KI-Ausflugsempfehlungen.
+- Implementierung des KI-Streamings.
+- Abschließende Gestaltung der Benutzeroberfläche.
+
+### Gemeinsame Aufgaben
+
+Die Gruppenmitglieder stimmen die Schnittstellen ab, testen die Anwendung und überprüfen die Anforderungen der Einsendeaufgabe.
+
+Die Entwicklung wird durch regelmäßige Git-Commits beider Gruppenmitglieder dokumentiert.
+
+## 6. Einsatz von KI
+
+TripWise verwendet eine LLM-API, um Wetterinformationen und Benutzereingaben zu verarbeiten und daraus individuelle Empfehlungen zu erstellen.
+
+Während der Entwicklung werden KI-Werkzeuge unterstützend eingesetzt. Der konkrete Einsatz, die verwendeten Werkzeuge und die Ergebnisse werden im Projektverlauf dokumentiert. Generierter Code wird durch die Gruppenmitglieder überprüft und getestet.
+
+API-Schlüssel werden nicht im GitHub-Repository gespeichert. Für eine Veröffentlichung ist eine sichere Verwaltung vertraulicher Zugangsdaten vorgesehen.
+
+## 7. Projektstatus
+
+Die React-Anwendung wurde mit TypeScript und Vite eingerichtet. Der Entwicklungsserver sowie der Produktions-Build wurden erfolgreich getestet.
+
+Die weiteren Funktionen werden schrittweise umgesetzt und durch Git-Commits dokumentiert.
