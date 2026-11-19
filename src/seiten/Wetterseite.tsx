@@ -5,22 +5,20 @@ import type { AusflugsAuswahl } from '../typen/ausflug';
 import type { WetterDaten } from '../typen/wetter';
 import WetterKarte from '../komponenten/WetterKarte';
 
-function Wetterseite({ ort, datum }: AusflugsAuswahl) {
+interface WetterseiteProps extends AusflugsAuswahl {
+  wetter: WetterDaten | null;
+}
 
-  // Beispielwerte bis zur Anbindung der Wetter-API
-  const testWetter: WetterDaten = {
-    datum: datum,
-    temperaturMin: 8,
-    temperaturMax: 15,
-    niederschlagsWahrscheinlichkeit: 30,
-    beschreibung: 'Teilweise bewölkt'
-  };
-
+function Wetterseite({
+  ort,
+  datum,
+  wetter
+}: WetterseiteProps) {
   return (
     <section>
       <h2>Wetterübersicht</h2>
 
-      {ort && datum ? (
+      {ort.trim() && datum ? (
         <>
           <p>
             Ausgewählter Ort: <strong>{ort}</strong>
@@ -30,13 +28,12 @@ function Wetterseite({ ort, datum }: AusflugsAuswahl) {
             Ausflugsdatum: <strong>{datum}</strong>
           </p>
 
-          <WetterKarte wetter={testWetter} />
+          {wetter && <WetterKarte wetter={wetter} />}
 
           <p>
             <small>
-              Hinweis: Die angezeigten Wetterwerte sind
-              derzeit Testdaten. Die Anbindung der
-              Open-Meteo-API erfolgt später.
+              Hinweis: Aktuell werden Testdaten verwendet.
+              Die Open-Meteo-API wird später eingebunden.
             </small>
           </p>
 
