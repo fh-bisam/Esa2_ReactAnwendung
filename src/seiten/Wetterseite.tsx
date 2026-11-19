@@ -1,8 +1,21 @@
+
 import { Link } from 'react-router-dom';
 
 import type { AusflugsAuswahl } from '../typen/ausflug';
+import type { WetterDaten } from '../typen/wetter';
+import WetterKarte from '../komponenten/WetterKarte';
 
 function Wetterseite({ ort, datum }: AusflugsAuswahl) {
+
+  // Beispielwerte bis zur Anbindung der Wetter-API
+  const testWetter: WetterDaten = {
+    datum: datum,
+    temperaturMin: 8,
+    temperaturMax: 15,
+    niederschlagsWahrscheinlichkeit: 30,
+    beschreibung: 'Teilweise bewölkt'
+  };
+
   return (
     <section>
       <h2>Wetterübersicht</h2>
@@ -17,10 +30,19 @@ function Wetterseite({ ort, datum }: AusflugsAuswahl) {
             Ausflugsdatum: <strong>{datum}</strong>
           </p>
 
+          <WetterKarte wetter={testWetter} />
+
           <p>
-            Die Wettervorhersage wird später
-            über die Open-Meteo-API geladen.
+            <small>
+              Hinweis: Die angezeigten Wetterwerte sind
+              derzeit Testdaten. Die Anbindung der
+              Open-Meteo-API erfolgt später.
+            </small>
           </p>
+
+          <Link to="/ki-berater">
+            Weiter zum KI-Ausflugsberater
+          </Link>
         </>
       ) : (
         <>
